@@ -33,22 +33,66 @@ const printBoard = () => {
 }
 
 const horizontalWin = () => {
-  // Your code here to check for horizontal wins
+    // checking if there is no empty spots and all spots are same, then you win 
+  for (let i = 0; i < board.length; i++) {
+    if (board[i][0] === board[i][1] && board[i][1] === board[i][2] && board[i][0] != ' ') {
+      return true
+    }
+  }
+  return false
 }
 
+// this function is checking for all the values being the same either 'x' or 'O', and also the positions not empty using a for loop inside the function.
+// if true, you win
+// if false, probably a spot is empty or not all the same value.
 const verticalWin = () => {
-  // Your code here to check for vertical wins
+  for (let i = 0; i < board.length; i++) {
+    if (board[0][i] === board[1][i] && board[1][i] === board[2][i] && board[0][i] != ' ') {
+      return true;
+    }
+   } return false;
 }
-
+// this function is using 2 if statements to check the positions for a diagonal win and (!empty) or not empty 
+  
 const diagonalWin = () => {
+  if (board[0][0] === board[1][1] && board[1][1] === board[2][2] && board[0][0] != ' ') {
+    return true
+  }
+
+  if (board[0][2] === board[1][1] && board[1][1] === board[2][0] && board[0][2] != ' ') {
+    return true
+  }
+
+  return false
   // Your code here to check for diagonal wins
 }
-
+// here we are saying as long as one of the 'wins' is true, return true. somebody won!
+// else, no one has won yet
 const checkForWin = () => {
+  if(horizontalWin()||verticalWin()||diagonalWin()){
+    return true;
+  }
   // Your code here call each of the check for types of wins
 }
 
 const ticTacToe = (row, column) => {
+  if (board[row][column] == ' ') {
+    board[row][column] = playerTurn;
+    if (checkForWin() == true) {
+      console.log(`Congrats! Player ${playerTurn} wins!`)
+    }
+    if (playerTurn == 'X') {
+      playerTurn = 'O'
+    } else {
+      playerTurn = 'X'
+    }
+  } else {
+    console.log(`Oops! try again.`)
+  }
+ 
+ 
+ 
+ 
   // Your code here to place a marker on the board
   // then check for a win
 }
